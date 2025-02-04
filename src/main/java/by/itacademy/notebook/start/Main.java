@@ -38,20 +38,20 @@ public class Main {
         response = contr.doAction(request);
         System.out.println(response);
 
-////////////////////////////////////////////////////
-
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Введите искомое выражение: ");
-        String newContent = scanner.nextLine();
-
-        System.out.print("Введите заменяемое значение: ");
-        String replacement = scanner.nextLine();
-
-        TextReplacement textReplacement = new TextReplacement(newContent, replacement);
-        textReplacement.replaceTextInFile("notes.txt", "notes.txt");
-
-        scanner.close();
+//////////////////////////////////////////////////////
+//
+//        Scanner scanner = new Scanner(System.in);
+//
+//        System.out.print("Введите искомое выражение: ");
+//        String newContent = scanner.nextLine();
+//
+//        System.out.print("Введите заменяемое значение: ");
+//        String replacement = scanner.nextLine();
+//
+//        TextReplacement textReplacement = new TextReplacement(newContent, replacement);
+//        textReplacement.replaceTextInFile("notes.txt", "notes.txt");
+//
+//        scanner.close();
 
 //        Scanner scanner = new Scanner(System.in);
 //        String menuPoint = "";

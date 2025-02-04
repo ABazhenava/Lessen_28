@@ -5,6 +5,7 @@ import by.itacademy.notebook.entity.Note;
 import by.itacademy.notebook.logic.LogicException;
 import by.itacademy.notebook.logic.LogicProvider;
 import by.itacademy.notebook.logic.NotebookLogic;
+import by.itacademy.notebook.validation.ValidationMethods;
 
 public class AddNoteCommand implements Command {
 
@@ -18,14 +19,24 @@ public class AddNoteCommand implements Command {
         Note newNote;
 
         params = request.split("\n");
+
+        if (params.length < 3 || !params[1].startsWith("title=") || !params[2].startsWith("content=")) {
+            return "Неверный формат запроса. Пожалуйста, используйте title= и content= в правильном порядке.";
+        }
+        String title = params[1].split("=")[1];
+        String content = params[2].split("=")[1];
+
+        if (!ValidationMethods.isValidTitle(title) || !ValidationMethods.isValidContent(content)) {
+            return "Неправильный формат заголовка или содержимого записи";
+        }
+
         newNote = new Note();
-        newNote.setTitle(params[1].split("=")[1]);
-        newNote.setContent(params[2].split("=")[1]);
+        newNote.setTitle(title);
+        newNote.setContent(content);
 
         try {
             logic.add(newNote);
             response = "Запись сохранена успешно.";
-
         } catch (LogicException e) {
             e.printStackTrace();
             response = "Попробуйте еще раз.";

@@ -5,6 +5,7 @@ import by.itacademy.notebook.entity.Note;
 import by.itacademy.notebook.logic.LogicException;
 import by.itacademy.notebook.logic.LogicProvider;
 import by.itacademy.notebook.logic.NotebookLogic;
+import by.itacademy.notebook.validation.ValidationMethods;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,13 +23,27 @@ public class UpdateNoteCommand implements Command {
 
         params = request.split("\n");
         newNote = new Note();
-
+        if (params.length < 5 || !ValidationMethods.isValidId(params[1].split("=")[1])) {
+            return "Неправильный формат ID.";
+        }
         newNote.setId(Integer.parseInt(params[1].split("=")[1]));
+
+        if (!ValidationMethods.isValidTitle(params[2].split("=")[1])) {
+            return "Неправильный формат заголовка записи.";
+        }
         newNote.setTitle(params[2].split("=")[1]);
+
+        if (!ValidationMethods.isValidContent(params[3].split("=")[1])) {
+            return "Неправильный формат содержания записи.";
+        }
         newNote.setContent(params[3].split("=")[1]);
 
+        if (!ValidationMethods.isValidDate(params[4].split("=")[1])) {
+            return "Неправильный формат даты, используйте. пожалуйста --> dd.MM.yyyy.";
+        }
+
         SimpleDateFormat format = new SimpleDateFormat();
-        format.applyPattern("yyyy-MM-dd");
+        format.applyPattern("dd.MM.yyyy");
         Date date;
         try {
             date = format.parse(params[4].split("=")[1]);
@@ -38,8 +53,8 @@ public class UpdateNoteCommand implements Command {
             response = "Запись была обновлена успешно.";
         } catch (ParseException e) {
             e.printStackTrace();
-           response = "Запись не обновлена.";
-		} catch(LogicException e) {
+            response = "Запись не обновлена.";
+        } catch (LogicException e) {
             e.printStackTrace();
             response = "Что-то случилось. Пробуйте еще раз";
         }

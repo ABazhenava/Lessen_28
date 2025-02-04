@@ -6,6 +6,7 @@ import by.itacademy.notebook.dao.NoteBookDao;
 import by.itacademy.notebook.entity.Note;
 import by.itacademy.notebook.logic.LogicException;
 import by.itacademy.notebook.logic.NotebookLogic;
+import by.itacademy.notebook.validation.ValidationMethods;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,25 @@ public class NotebookLogicImpl implements NotebookLogic {
     }
 
     public void add(String title, String content) throws LogicException {
+        if (!ValidationMethods.isValidTitle(title)) {
+            throw new LogicException("Неправильный формат заголовка записи.");
+        }
+        if (title.length() >= 200) {
+            throw new LogicException("Заголовок должен содержать не более 200 символов.");
+        }
+        if (ValidationMethods.containsForbiddenWords(title)) {
+            throw new LogicException("Загловок содержит нецензурные слова. Пожалуйста, исправьте.");
+        }
+        if (!ValidationMethods.isValidContent(content)) {
+            throw new LogicException("Неправильный формат содержания.");
+        }
+        if (content.length() >= 1000) {
+            throw new LogicException("Содержание может включать не более 1000 символов.");
+        }
+        if (ValidationMethods.containsForbiddenWords(content)) {
+            throw new LogicException("В содержании найдены нецензурные слова. Пожалуйста, исправьте.");
+        }
+
         Note n = new Note(title, content);
         try {
             dao.save(n);
@@ -79,4 +99,3 @@ public class NotebookLogicImpl implements NotebookLogic {
         }
     }
 }
-
