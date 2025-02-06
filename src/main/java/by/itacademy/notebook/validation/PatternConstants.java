@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-public final class PatternVar {
+public final class PatternConstants {
 
     public static final Pattern COMMAND_PATTERN = Pattern.compile("^[А-Я] + $");
     public static final Pattern TITLE_PATTERN = Pattern.compile("^[А-Яа-я0-9_ ]+$");

@@ -1,7 +1,7 @@
 package by.itacademy.notebook.controller;
 
 import by.itacademy.notebook.logic.LogicException;
-import by.itacademy.notebook.validation.ValidationMethods;
+import by.itacademy.notebook.validation.Validation;
 
 
 public class Controller {
@@ -12,7 +12,7 @@ public class Controller {
         String substring = request.substring(0, request.indexOf(paramDelimeter));
         String command = substring.toUpperCase();
 
-        if (!ValidationMethods.isValidCommandName(command)) {
+        if (!Validation.isValidCommandName(command)) {
             return "Неправильный формат команды.";
         }
 

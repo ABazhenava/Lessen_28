@@ -43,46 +43,6 @@ public class FileNoteBookDao implements NoteBookDao {
         return null;
     }
 
-
-    //    public List<Note> allNotes() throws DaoException {
-//        List<Note> notes = new ArrayList<>();
-//        BufferedReader reader = null;
-//        try {
-//            reader = new BufferedReader(new FileReader("notes.txt"));
-//            String line;
-//            Note note = null;
-//            while ((line = reader.readLine()) != null) {
-//                note = processLine(line, note, notes);
-//            }
-//        } catch (ParseException e) {
-//            throw new DaoException("Ошибка при чтении даты: ", e);
-//        } catch (IOException e) {
-//            throw new DaoException("Ошибка при чтении записей: ", e);
-//        } finally {
-//            if (reader != null) {
-//                try {
-//                    reader.close();
-//                } catch (IOException e1) {
-//                    throw new DaoException("Ошибка при закрытии файла: ", e1);
-//                }
-//            }
-//        }
-//        return notes;
-//    }
-//
-//    private Note processLine(String line, Note note, List<Note> notes) throws ParseException {
-//        if (line.startsWith("Title: ")) {
-//            note = new Note();
-//            note.setTitle(line.substring(7));
-//        } else if (line.startsWith("Content: ")) {
-//            note.setContent(line.substring(9));
-//        } else if (line.startsWith("Date: ")) {
-//            note.setD(DATE_FORMAT.parse(line.substring(6)));
-//        } else if (line.equals("----------")) {
-//            notes.add(note);
-//        }
-//        return note;
-//    }
     @Override
     public List<Note> allNotes() throws DaoException {
         List<Note> notes = new ArrayList<>();

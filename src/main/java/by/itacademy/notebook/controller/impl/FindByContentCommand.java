@@ -5,7 +5,7 @@ import by.itacademy.notebook.entity.Note;
 import by.itacademy.notebook.logic.LogicException;
 import by.itacademy.notebook.logic.LogicProvider;
 import by.itacademy.notebook.logic.NotebookLogic;
-import by.itacademy.notebook.validation.ValidationMethods;
+import by.itacademy.notebook.validation.Validation;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class FindByContentCommand implements Command {
 
         params = request.split("\n");
 
-        if (params.length < 2 || !ValidationMethods.isValidContent(params[1])) {
+        if (params.length < 2 || !Validation.isValidContent(params[1])) {
             return "Неправильный формат содержимого записи.";
         }
 

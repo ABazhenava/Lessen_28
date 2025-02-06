@@ -5,7 +5,7 @@ import by.itacademy.notebook.entity.Note;
 import by.itacademy.notebook.logic.LogicException;
 import by.itacademy.notebook.logic.LogicProvider;
 import by.itacademy.notebook.logic.NotebookLogic;
-import by.itacademy.notebook.validation.ValidationMethods;
+import by.itacademy.notebook.validation.Validation;
 
 public class AddNoteCommand implements Command {
 
@@ -26,7 +26,7 @@ public class AddNoteCommand implements Command {
         String title = params[1].split("=")[1];
         String content = params[2].split("=")[1];
 
-        if (!ValidationMethods.isValidTitle(title) || !ValidationMethods.isValidContent(content)) {
+        if (!Validation.isValidTitle(title) || !Validation.isValidContent(content)) {
             return "Неправильный формат заголовка или содержимого записи";
         }
 

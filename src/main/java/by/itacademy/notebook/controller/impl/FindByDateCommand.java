@@ -6,12 +6,10 @@ import by.itacademy.notebook.entity.Note;
 import by.itacademy.notebook.logic.LogicException;
 import by.itacademy.notebook.logic.LogicProvider;
 import by.itacademy.notebook.logic.NotebookLogic;
-import by.itacademy.notebook.validation.ValidationMethods;
+import by.itacademy.notebook.validation.Validation;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class FindByDateCommand implements Command {
     private final LogicProvider logicProvider = LogicProvider.getInstance();
@@ -25,7 +23,7 @@ public class FindByDateCommand implements Command {
 
         params = request.split("\n");
 
-        if (params.length < 2 || !ValidationMethods.isValidDate(params[1])) {
+        if (params.length < 2 || !Validation.isValidDate(params[1])) {
             return "Неправильный формат даты. Используйте, пожалуйста, dd.MM.yyyy.";
         }
 
@@ -42,6 +40,4 @@ public class FindByDateCommand implements Command {
         }
         return response;
     }
-
-
 }
