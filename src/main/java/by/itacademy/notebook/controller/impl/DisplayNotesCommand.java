@@ -1,7 +1,9 @@
 package by.itacademy.notebook.controller.impl;
 
 import by.itacademy.notebook.controller.Command;
+import by.itacademy.notebook.dao.DaoException;
 import by.itacademy.notebook.entity.Note;
+import by.itacademy.notebook.logic.LogicException;
 import by.itacademy.notebook.logic.LogicProvider;
 import by.itacademy.notebook.logic.NotebookLogic;
 
@@ -21,10 +23,11 @@ public class DisplayNotesCommand implements Command {
             for (Note note : n) {
                 response.append(note.toString()).append("\n");
             }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
+        } catch (LogicException e) {
             response.append("Возникла ошибка при получении записей: ").append(e);
+            return response.toString();
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
         }
         return response.toString();
     }

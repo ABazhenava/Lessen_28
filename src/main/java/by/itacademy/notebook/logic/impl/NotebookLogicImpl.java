@@ -6,7 +6,7 @@ import by.itacademy.notebook.dao.NoteBookDao;
 import by.itacademy.notebook.entity.Note;
 import by.itacademy.notebook.logic.LogicException;
 import by.itacademy.notebook.logic.NotebookLogic;
-import by.itacademy.notebook.validation.Validation;
+import by.itacademy.notebook.validation.ValidatorUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,22 +25,22 @@ public class NotebookLogicImpl implements NotebookLogic {
     }
 
     public void add(String title, String content) throws LogicException {
-        if (!Validation.isValidTitle(title)) {
+        if (!ValidatorUtils.hasValidateTitle(title)) {
             throw new LogicException("Неправильный формат заголовка записи.");
         }
         if (title.length() >= 200) {
             throw new LogicException("Заголовок должен содержать не более 200 символов.");
         }
-        if (Validation.containsForbiddenWords(title)) {
+        if (ValidatorUtils.isCheckForBannedWords(title)) {
             throw new LogicException("Загловок содержит нецензурные слова. Пожалуйста, исправьте.");
         }
-        if (!Validation.isValidContent(content)) {
+        if (!ValidatorUtils.hasValidateDate(content)) {
             throw new LogicException("Неправильный формат содержания.");
         }
         if (content.length() >= 1000) {
             throw new LogicException("Содержание может включать не более 1000 символов.");
         }
-        if (Validation.containsForbiddenWords(content)) {
+        if (ValidatorUtils.isCheckForBannedWords(content)) {
             throw new LogicException("В содержании найдены нецензурные слова. Пожалуйста, исправьте.");
         }
 

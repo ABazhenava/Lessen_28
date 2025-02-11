@@ -1,12 +1,13 @@
 package by.itacademy.notebook.start;
 
 import by.itacademy.notebook.controller.Controller;
+import by.itacademy.notebook.dao.DaoException;
 import by.itacademy.notebook.logic.LogicException;
 
 
 public class Main {
 
-    public static void main(String[] args) throws LogicException {
+    public static void main(String[] args) throws LogicException, DaoException {
 
         Controller contr = new Controller();
         String request;
@@ -20,11 +21,11 @@ public class Main {
         response = contr.doAction(request);
         System.out.println(response);
 
-        request = "UPDATE\nid=1\ntitle=Номер один\ncontent=Новая запись по списку\ndate=2025-01-01";
+        request = "UPDATE\nid=1\ntitle=Номер один\ncontent=Новая запись по списку\ndate=11.01.2025";
         response = contr.doAction(request);
         System.out.println(response);
 
-        request = "FINDBYDATE\ndate=2025-01-02";
+        request = "FINDBYDATE\ndate=21.01.2025";
         response = contr.doAction(request);
         System.out.println(response);
 
